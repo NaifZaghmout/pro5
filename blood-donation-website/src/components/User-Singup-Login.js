@@ -1,9 +1,9 @@
-// Staff-Signup-Login.js
+// UserSignupLogin.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './StaffSignupLogin.css';
+import '../style/UserSignupLogin.css'; // Create this CSS file for styling
 
-const StaffSignupLogin = () => {
+const UserSignupLogin = () => {
   const [isSignup, setSignup] = useState(true);
 
   const toggleForm = () => {
@@ -12,8 +12,8 @@ const StaffSignupLogin = () => {
 
   return (
     <div className="auth-container">
-      <div className={`auth-form staff-form ${isSignup ? 'signup' : 'login'}`}>
-        <h2>{isSignup ? 'Staff Signup' : 'Staff Login'}</h2>
+      <div className={`auth-form user-form ${isSignup ? 'signup' : 'login'}`}>
+        <h2>{isSignup ? 'User Signup' : 'User Login'}</h2>
         <form>
           <div className="mb-3">
             <label htmlFor="username" className="form-label">
@@ -47,13 +47,9 @@ const StaffSignupLogin = () => {
           {isSignup ? 'Already have an account?' : 'Don’t have an account?'}{' '}
           <Link onClick={toggleForm}>{isSignup ? 'Login' : 'Signup'}</Link>
         </p>
-        
       </div>
     </div>
-
-
-
   );
 };
 
-export default StaffSignupLogin;
+export default UserSignupLogin;
