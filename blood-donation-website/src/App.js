@@ -1,12 +1,12 @@
 // App.js
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Switch } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Home from './components/Home';
-import AboutUs from './components/AboutUs';
-import ContactUs from './components/ContactUs';
-import User from './components/User';
-import Staff from './components/Staff';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './Navbar';
+import Home from './Home';
+import AboutUs from './AboutUs';
+import ContactUs from './ContactUs';
+import UserSignupLogin from './User-Singup-Login'; // Adjust the path
+import StaffSignupLogin from './Staff-Singup-Login'; // Adjust the path
 
 function App() {
   return (
@@ -18,8 +18,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/aboutus" element={<AboutUs />} />
             <Route path="/contactus" element={<ContactUs />} />
-            <Route path="/user" element={<User />} />
-            <Route path="/staff" element={<Staff />} />
+            <Route path="/user" element={<UserSignupLogin />} />
+            <Route path="/staff" element={<StaffSignupLogin />} />
           </Routes>
         </div>
       </div>
