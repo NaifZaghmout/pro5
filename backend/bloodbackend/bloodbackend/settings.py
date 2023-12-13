@@ -33,6 +33,14 @@ CORS_ALLOWED_ORIGINS = [
     "http://0.0.0.0",
 ]
 
+AUTH_USER_MODEL = "user_api.AppUser"
+
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.SessionAuthentication",
+    ),
+}
 # Application definition
 
 INSTALLED_APPS = [
