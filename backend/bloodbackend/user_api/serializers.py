@@ -4,6 +4,7 @@ Django App Serializers
 from rest_framework import serializers
 from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model, authenticate
+from .models import PatientBlood
 
 UserModel = get_user_model()
 
@@ -54,3 +55,16 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserModel
         fields = ("email", "username")
+
+
+class PatientBloodSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PatientBlood
+        fields = [
+            "id",
+            "patient_name",
+            "patient_email",
+            "patient_phone_number",
+            "patient_blood_type",
+            "patient_health_information",
+        ]

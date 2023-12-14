@@ -5,8 +5,14 @@ from django.contrib.auth import get_user_model, login, logout
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer
-from rest_framework import permissions, status
+from .serializers import (
+    UserRegisterSerializer,
+    UserLoginSerializer,
+    UserSerializer,
+    PatientBloodSerializer,
+)
+from .models import PatientBlood
+from rest_framework import permissions, status, generics
 from .validations import custom_validation, validate_email, validate_password
 
 
@@ -81,3 +87,19 @@ class UserView(APIView):
     def get(self, request):
         serializer = UserSerializer(request.user)
         return Response({"user": serializer.data}, status=status.HTTP_200_OK)
+
+
+class PatientBloodCreateView(APIView):
+    def post(self, request, format=None):
+        serializer = PatientBloodSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class PatientBloodListView(generics.ListAPIView):
+    queryset = PatientBlood.objects.all()
+    serializer_class = PatientBloodSerializer
