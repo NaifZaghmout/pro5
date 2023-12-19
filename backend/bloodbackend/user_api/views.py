@@ -124,3 +124,10 @@ class PatientBloodMarkResolvedView(generics.UpdateAPIView):
         instance.mark_as_resolved()
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
+
+
+class PatientBloodUnresolvedListView(generics.ListAPIView):
+    serializer_class = PatientBloodSerializer
+
+    def get_queryset(self):
+        return PatientBlood.objects.filter(resolved=False)
