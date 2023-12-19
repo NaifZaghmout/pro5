@@ -103,3 +103,24 @@ class PatientBloodCreateView(APIView):
 class PatientBloodListView(generics.ListAPIView):
     queryset = PatientBlood.objects.all()
     serializer_class = PatientBloodSerializer
+
+
+class PatientBloodDeleteView(generics.DestroyAPIView):
+    queryset = PatientBlood.objects.all()
+    serializer_class = PatientBloodSerializer
+    lookup_field = "id"
+
+
+class PatientBloodMarkResolvedView(generics.UpdateAPIView):
+    queryset = PatientBlood.objects.all()
+    serializer_class = PatientBloodSerializer
+    lookup_field = "id"
+
+    def update(self, request, *args, **kwargs):
+        """
+        Update the case as resolved
+        """
+        instance = self.get_object()
+        instance.mark_as_resolved()
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
