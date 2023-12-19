@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Image } from 'react-bootstrap';
 import Loader from '../components/Loader';
 import '../style/Home.css';
-
+import { Carousel } from 'react-responsive-carousel';
 
 
 
@@ -72,11 +72,13 @@ const Home = () => {
                 Read More
               </a>
             </div>
+            <br/>
             <Image
               src="https://res.cloudinary.com/dusc2x8ri/image/upload/v1701420205/images-male_ir189s.jpg"
               alt="Male Donor"
               fluid
               className="donate-image"
+              style={{width: 300, height: 300, borderRadius: 300/ 2}} 
             />
           </Col>
           <Col md={6} className="text-center order-md-last">
@@ -92,12 +94,13 @@ const Home = () => {
                 Read More
               </a>
             </div>
-
+            <br/>
             <Image
               src="https://res.cloudinary.com/dusc2x8ri/image/upload/v1701420190/images-female_qlhjmx.jpg"
               alt="Female Donor"
               fluid
               className="donate-image"
+              style={{width: 300, height: 300, borderRadius: 300/ 2}} 
             />
           </Col>
         </Row>
