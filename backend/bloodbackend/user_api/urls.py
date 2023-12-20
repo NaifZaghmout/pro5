@@ -17,7 +17,7 @@ urlpatterns = [
     path(
         "listpatients/", views.PatientBloodListView.as_view(), name="patient_blood_list"
     ),
-    path(
+      path(
         "delete/<int:pk>/",
         views.PatientBloodDeleteView.as_view(),
         name="patient_blood_delete",

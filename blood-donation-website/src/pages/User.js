@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button, FormGroup, FormControl, FormLabel } from 'react-bootstrap';
-import '../style/User.css'; // Ensure correct path
+import '../style/User.css';
 
 function User() {
   const [step, setStep] = useState(1);
@@ -16,10 +16,29 @@ function User() {
     setStep(step + 1);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(formData);
-    // Implement submission logic here
+
+    try {
+      const response = await fetch('https://8000-naifzaghmou-blooddonate-8h80369qfat.ws-us107.gitpod.io/createpatientblood/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer YOUR_TOKEN_HERE',
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log('Success:', data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   const handleChange = (event) => {

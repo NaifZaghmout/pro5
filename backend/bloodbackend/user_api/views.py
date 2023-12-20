@@ -9,18 +9,18 @@ from .serializers import (
     UserRegisterSerializer,
     UserLoginSerializer,
     UserSerializer,
-    PatientBloodSerializer,
-)
+    PatientBloodSerializer,)
 from .models import PatientBlood
 from rest_framework import permissions, status, generics
 from .validations import custom_validation, validate_email, validate_password
+
+
 
 
 class UserRegister(APIView):
     """
     User Register
     """
-
     permission_classes = (permissions.AllowAny,)
 
     def post(self, request):
@@ -36,15 +36,15 @@ class UserRegister(APIView):
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
+
 class UserLogin(APIView):
     """
     User Login
     """
-
     permission_classes = (permissions.AllowAny,)
     authentication_classes = (SessionAuthentication,)
 
-    ##
+    
     def post(self, request):
         """
         Post
@@ -59,11 +59,12 @@ class UserLogin(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+
+
 class UserLogout(APIView):
     """
     User Logout
     """
-
     permission_classes = (permissions.AllowAny,)
     authentication_classes = ()
 
@@ -75,21 +76,25 @@ class UserLogout(APIView):
         return Response(status=status.HTTP_200_OK)
 
 
+
+
 class UserView(APIView):
     """
     User View
     """
-
     permission_classes = (permissions.IsAuthenticated,)
     authentication_classes = (SessionAuthentication,)
 
-    ##
+    
     def get(self, request):
         serializer = UserSerializer(request.user)
         return Response({"user": serializer.data}, status=status.HTTP_200_OK)
 
 
+
 class PatientBloodCreateView(APIView):
+    permission_classes = [permissions.AllowAny]
+
     def post(self, request, format=None):
         serializer = PatientBloodSerializer(data=request.data)
 
@@ -100,15 +105,21 @@ class PatientBloodCreateView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+
 class PatientBloodListView(generics.ListAPIView):
     queryset = PatientBlood.objects.all()
     serializer_class = PatientBloodSerializer
 
 
+
+
+    
 class PatientBloodDeleteView(generics.DestroyAPIView):
     queryset = PatientBlood.objects.all()
     serializer_class = PatientBloodSerializer
     lookup_field = "id"
+
+
 
 
 class PatientBloodMarkResolvedView(generics.UpdateAPIView):
@@ -126,8 +137,12 @@ class PatientBloodMarkResolvedView(generics.UpdateAPIView):
         return Response(serializer.data)
 
 
+
+
 class PatientBloodUnresolvedListView(generics.ListAPIView):
     serializer_class = PatientBloodSerializer
 
     def get_queryset(self):
         return PatientBlood.objects.filter(resolved=False)
+        
+
