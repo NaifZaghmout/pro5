@@ -25,7 +25,40 @@ const StaffSignupLogin = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         setLoading(true);
+    
+    const email = document.getElementById('email').value;
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword')?.value;
 
+    let data = JSON.stringify({
+        "email": email,
+        "username": username,
+        "password": password,
+        "confirmpassword": confirmPassword
+      });
+      
+      let config = {
+        method: 'post',
+        maxBodyLength: Infinity,
+        url: '[REPLACE YOUR URL HERE]/api/register',
+        headers: { 
+          'x_api_key': 'test', 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+      
+
+      axios.request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+      
+  };
         setTimeout(() => {
             setLoading(false);
         }, 3000);
@@ -46,6 +79,12 @@ const StaffSignupLogin = () => {
                             Username
                         </label>
                         <input type="text" className="form-control" id="username" />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="email" className="form-label">
+                            Email
+                        </label>
+                        <input type="text" className="form-control" id="email" />
                     </div>
 
                     <div className="mb-3">
