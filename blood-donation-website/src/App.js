@@ -9,7 +9,7 @@ import User from './pages/User';
 import Signup from './components/Staff-Singup';
 import NotFoundPage from './components/NotFoundPage';
 import Footer from './components/Footer';
-
+import Login from './components/staff-login';
 
 function App() {
   return (
@@ -23,6 +23,7 @@ function App() {
             <Route path="/contactus" element={<ContactUs />} />
             <Route path="/user" element={<User />} />
             <Route path="/staff-signup" element={<Signup />} />
+            <Route path="/staff-login" element={<Login />} />
             <Route path="/NotFoundPage" element={<NotFoundPage />} />
             <Route path="/footer" element={<Footer />} />
           </Routes>
